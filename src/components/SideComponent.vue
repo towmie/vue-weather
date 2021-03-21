@@ -18,6 +18,21 @@ export default {};
 </script>
 
 <style scoped>
+.side__type {
+  font-size: 5rem;
+  position: relative;
+  padding-left: 1rem;
+  color: rgb(207, 207, 207);
+}
+
+.side__type::before {
+  content: "°";
+  position: absolute;
+  top: 0rem;
+  left: 0;
+  width: 0.2rem;
+  height: 0.2rem;
+}
 .side__wrapper {
   background-color: #1e213a;
   min-width: 32rem;
@@ -87,22 +102,6 @@ export default {};
   font-size: 8rem;
 }
 
-.side__type {
-  font-size: 5rem;
-  position: relative;
-  padding-left: 1rem;
-  color: rgb(207, 207, 207);
-}
-
-.side__type::before {
-  content: "°";
-  position: absolute;
-  top: 0.2rem;
-  left: 0;
-  width: 0.2rem;
-  height: 0.2rem;
-}
-
 .side__weather {
   margin: 7.5rem 0;
   color: #d8d8da;
@@ -117,5 +116,8 @@ export default {};
   line-height: 2.1rem;
   font-weight: 500;
   color: #88869d;
+}
+.aside__date span {
+  margin-left: 1rem;
 }
 </style>

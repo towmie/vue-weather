@@ -7,7 +7,8 @@
 
 <script>
 import SideComponent from "./components/SideComponent";
-import MainComponent from "./components/MainComponent";
+import MainComponent from "./components/mainComponents/MainComponent.vue";
+
 export default {
   components: { SideComponent, MainComponent },
 };
