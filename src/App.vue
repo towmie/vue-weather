@@ -52,5 +52,6 @@ button {
 
 .main {
   display: flex;
+  position: relative;
 }
 </style>
