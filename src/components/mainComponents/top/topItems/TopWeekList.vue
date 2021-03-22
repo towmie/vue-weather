@@ -17,7 +17,7 @@ export default {
 
 <style scoped>
 .weeklist {
-  margin: 4rem auto;
+  margin: 2rem auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
