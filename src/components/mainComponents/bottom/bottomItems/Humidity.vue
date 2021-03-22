@@ -2,11 +2,11 @@
   <base-bottom-item>
     <h5 class="heading">Humidity</h5>
     <p class="info-box">
-      <span class="data">99</span>
+      <span class="data">{{ getHumidity }}</span>
       <span class="units">%</span>
     </p>
     <div class="range">
-      <div class="range__tracker"></div>
+      <div class="range__tracker" :style="{ width: getHumidity + '%' }"></div>
     </div>
   </base-bottom-item>
 </template>
@@ -15,6 +15,11 @@
 import BaseBottomItem from "../../../base/BaseBottomItem";
 export default {
   components: { BaseBottomItem },
+  computed: {
+    getHumidity() {
+      return this.$store.getters.currentHumidity;
+    },
+  },
 };
 </script>
 

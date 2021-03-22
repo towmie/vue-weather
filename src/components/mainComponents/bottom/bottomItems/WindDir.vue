@@ -2,11 +2,14 @@
   <base-bottom-item>
     <h5 class="heading">Wind Status</h5>
     <p class="info-box">
-      <span class="data">99</span>
-      <span class="units">mph</span>
+      <span class="data">{{ getCurWindSpeed }}</span>
+      <span class="units">m/s</span>
     </p>
     <div class="info-box">
-      <span class="icon"></span>
+      <span
+        class="icon"
+        :style="{ transform: `rotate(${getWindDir}deg)` }"
+      ></span>
       <span class="units">Direction</span>
     </div>
   </base-bottom-item>
@@ -16,6 +19,15 @@
 import BaseBottomItem from "../../../base/BaseBottomItem";
 export default {
   components: { BaseBottomItem },
+  computed: {
+    getCurWindSpeed() {
+      return this.$store.getters.currentWindSpeed;
+    },
+
+    getWindDir() {
+      return this.$store.getters.currentWindDeg;
+    },
+  },
 };
 </script>
 

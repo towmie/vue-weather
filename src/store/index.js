@@ -13,6 +13,7 @@ export default createStore({
       pressure: null,
       windSpeed: null,
       windDegree: null,
+      visibility: null,
     };
   },
   mutations: {
@@ -28,7 +29,9 @@ export default createStore({
     setTemp(state, payload) {
       state.temp = payload.toFixed();
     },
-
+    setVisibility(state, payload) {
+      state.visibility = (payload / 1000).toFixed(1);
+    },
     setHumidity(state, payload) {
       state.humidity = payload;
     },
@@ -39,7 +42,7 @@ export default createStore({
       state.windDegree = payload;
     },
     setWindSpeed(state, payload) {
-      state.speed = payload;
+      state.windSpeed = payload;
     },
   },
 
@@ -57,7 +60,6 @@ export default createStore({
       const { icon, main } = data.weather[0];
       const { temp, pressure, humidity } = data.main;
       const { deg, speed } = data.wind;
-
       context.commit("setIcon", icon);
       context.commit("setDescription", main);
       context.commit("setTemp", temp);
@@ -65,6 +67,7 @@ export default createStore({
       context.commit("setHumidity", humidity);
       context.commit("setWindDeg", deg);
       context.commit("setWindSpeed", speed);
+      context.commit("setVisibility", data.visibility);
     },
   },
   getters: {
@@ -72,8 +75,7 @@ export default createStore({
       return state.currentCity;
     },
     currentIcon(state) {
-      const icon = state.icon;
-      return `/../assetes/icons/${icon}.png`;
+      return state.icon;
     },
     currentDescription(state) {
       return state.description;
@@ -93,6 +95,9 @@ export default createStore({
     },
     currentWindDeg(state) {
       return state.windDegree;
+    },
+    curretVisibility(state) {
+      return state.visibility;
     },
   },
 });

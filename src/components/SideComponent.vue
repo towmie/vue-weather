@@ -1,23 +1,28 @@
+// ./../assets/icons/01d.png
 <template>
   <div class="side__wrapper">
     <div class="side__location">{{ currentCity }}</div>
     <div class="side__info">
-      <img class="side__img" :src="currentIcon" alt="" />
+      <img
+        class="side__img"
+        :src="`https://zyzin.com/projects/weather/img/weather-icons/${currentIcon}.png`"
+        alt=""
+      />
       <div class="side__temp">
         <span class="side__data">{{ currentTrmp }}</span>
         <span class="side__type">C</span>
       </div>
       <p class="side__weather">{{ currentDesc }}</p>
     </div>
-    <p class="aside__date">
-      Today: <span>{{ date }}</span>
-    </p>
+    <p class="aside__date">Today: <span></span></p>
   </div>
 </template>
 
 <script>
 export default {
-  methods: {},
+  data() {
+    return {};
+  },
   computed: {
     currentCity() {
       return this.$store.getters.enteredCity;
@@ -31,11 +36,8 @@ export default {
     currentIcon() {
       return this.$store.getters.currentIcon;
     },
-    date() {
-      const day = new Date();
-      return day;
-    },
   },
+  methods: {},
 };
 </script>
 

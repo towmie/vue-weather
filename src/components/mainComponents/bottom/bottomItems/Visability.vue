@@ -2,7 +2,7 @@
   <base-bottom-item>
     <h5 class="heading">Visability</h5>
     <p class="info-box">
-      <span class="data">6.4</span>
+      <span class="data">{{ getVisability }}</span>
       <span class="units">km</span>
     </p>
   </base-bottom-item>
@@ -12,6 +12,11 @@
 import BaseBottomItem from "../../../base/BaseBottomItem";
 export default {
   components: { BaseBottomItem },
+  computed: {
+    getVisability() {
+      return this.$store.getters.curretVisibility;
+    },
+  },
 };
 </script>
 

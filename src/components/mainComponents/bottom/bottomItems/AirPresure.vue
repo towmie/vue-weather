@@ -1,8 +1,8 @@
 <template>
   <base-bottom-item>
-    <h5 class="heading">Air Presure</h5>
+    <h5 class="heading">Air Pressure</h5>
     <p class="info-box">
-      <span class="data">1002</span>
+      <span class="data">{{ getPressure }}</span>
       <span class="units">mb</span>
     </p>
   </base-bottom-item>
@@ -12,6 +12,11 @@
 import BaseBottomItem from "../../../base/BaseBottomItem";
 export default {
   components: { BaseBottomItem },
+  computed: {
+    getPressure() {
+      return this.$store.getters.currentPressure;
+    },
+  },
 };
 </script>
 
