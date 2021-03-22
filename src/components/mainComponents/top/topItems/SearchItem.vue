@@ -1,12 +1,32 @@
+// 'use strict';
 <template>
-  <form class="form">
-    <input class="search" type="text" placeholder="Enter your City" />
+  <form @submit.prevent="setCity" class="form">
+    <input
+      class="search"
+      type="text"
+      placeholder="Enter your City"
+      v-model="cityName"
+      name="city"
+    />
     <button type="submit" class="search-btn"></button>
   </form>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      cityName: "",
+    };
+  },
+  methods: {
+    setCity() {
+      this.$store.dispatch("setCity", this.cityName);
+      this.$store.dispatch("getCityData", this.cityName);
+      this.cityName = "";
+    },
+  },
+};
 </script>
 
 <style scoped>

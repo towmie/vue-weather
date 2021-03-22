@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <p class="date">Today</p>
-    <img src="../../../../assets/icons/01d.png" alt="" />
+    <img class="img" src="../../../../assets/icons/01d.png" alt="" />
     <div class="temp__diff">
       <p class="temp__max">
         10
@@ -20,6 +20,9 @@ export default {};
 </script>
 
 <style scoped>
+.img {
+  width: 6.5rem;
+}
 .temp__type {
   margin-left: -0.5rem;
   position: relative;
@@ -41,7 +44,7 @@ export default {};
   min-width: 13rem;
   max-width: 13.3rem;
   width: 100%;
-  height: 19rem;
+  height: 17rem;
   background-color: #1e213a;
   text-align: center;
 

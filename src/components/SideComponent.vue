@@ -1,20 +1,42 @@
 <template>
   <div class="side__wrapper">
-    <div class="side__location">Moscow</div>
+    <div class="side__location">{{ currentCity }}</div>
     <div class="side__info">
-      <img class="side__img" src="./../assets/icons/01d.png" alt="" />
+      <img class="side__img" :src="currentIcon" alt="" />
       <div class="side__temp">
-        <span class="side__data">10</span>
+        <span class="side__data">{{ currentTrmp }}</span>
         <span class="side__type">C</span>
       </div>
-      <p class="side__weather">Clouds</p>
+      <p class="side__weather">{{ currentDesc }}</p>
     </div>
-    <p class="aside__date">Today: <span>Sun, 21 Mar</span></p>
+    <p class="aside__date">
+      Today: <span>{{ date }}</span>
+    </p>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {},
+  computed: {
+    currentCity() {
+      return this.$store.getters.enteredCity;
+    },
+    currentTrmp() {
+      return this.$store.getters.currentTemp;
+    },
+    currentDesc() {
+      return this.$store.getters.currentDescription;
+    },
+    currentIcon() {
+      return this.$store.getters.currentIcon;
+    },
+    date() {
+      const day = new Date();
+      return day;
+    },
+  },
+};
 </script>
 
 <style scoped>
