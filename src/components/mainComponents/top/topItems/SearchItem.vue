@@ -2,7 +2,7 @@
 <template>
   <form @submit.prevent="setCity" class="form">
     <input
-      class="search"
+      class="search error"
       type="text"
       placeholder="Enter your City"
       v-model="cityName"
@@ -39,11 +39,14 @@ export default {
   padding: 1rem 3rem;
   width: 100%;
   border: none;
-  outline: none;
+  /* outline: none; */
   border-radius: 1.5rem;
   font-family: inherit;
   font-size: 1.6rem;
   background-color: rgb(221, 221, 221);
+}
+.error {
+  /* outline: crimson; */
 }
 
 .search-btn {

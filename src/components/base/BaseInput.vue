@@ -2,6 +2,7 @@
   <form class="form" @submit.prevent="hideInput" v-if="getHideModalValue">
     <input type="text" name="" id="" class="input" v-model="cityName" />
     <button type="submit" class="search-btn"></button>
+    <div v-if="gotError" class="error">{{ gotErrorMessage }} ... Try Again</div>
   </form>
 </template>
 
@@ -22,6 +23,12 @@ export default {
     getHideModalValue() {
       return this.$store.getters.modalInput;
     },
+    gotError() {
+      return this.$store.getters.errorState;
+    },
+    gotErrorMessage() {
+      return this.$store.getters.errorMessage;
+    },
   },
 };
 </script>
@@ -32,6 +39,18 @@ export default {
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.error {
+  position: absolute;
+  width: 50rem;
+  top: 6rem;
+  left: -7.5rem;
+  text-align: center;
+  font-weight: 300;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: brown;
 }
 .input {
   font-size: 3rem;

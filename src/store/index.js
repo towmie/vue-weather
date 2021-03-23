@@ -17,10 +17,18 @@ export default createStore({
       windDegree: null,
       visibility: null,
       forecast: [],
+      error: false,
+      errorMessage: "",
     };
   },
 
   mutations: {
+    showError(state, payload) {
+      state.error = payload.error;
+      state.errorMessage = payload.message;
+      state.modalInput = true;
+    },
+
     hideModalInput(state, payload) {
       state.modalInput = payload;
     },
@@ -102,8 +110,10 @@ export default createStore({
 
   actions: {
     hideModalInput(context, payload) {
+      // if (!payload) return;
       context.commit("hideModalInput", payload);
     },
+
     setCity(context, payload) {
       context.commit("setCity", payload);
     },
@@ -115,39 +125,65 @@ export default createStore({
     },
 
     async getCityData(context, payload) {
-      const apiKey = "56b7d91218774cf2f9808498488f31f9";
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${payload}&appid=${apiKey}&units=metric`
-      );
-      const data = await response.json();
-      const { icon, main, description } = data.weather[0];
-      const { temp, pressure, humidity } = data.main;
-      const { deg, speed } = data.wind;
+      try {
+        if (!payload) throw new Error("Empty value");
+        const apiKey = "56b7d91218774cf2f9808498488f31f9";
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${payload}&appid=${apiKey}&units=metric`
+        );
 
-      context.commit("setIcon", icon);
-      context.commit("setWeather", main);
-      context.commit("setTemp", temp);
-      context.commit("setDescription", description);
-      context.commit("setPressure", pressure);
-      context.commit("setHumidity", humidity);
-      context.commit("setWindDeg", deg);
-      context.commit("setWindSpeed", speed);
-      context.commit("setVisibility", data.visibility);
+        if (!response.ok) throw new Error("Can't find this city");
+
+        const data = await response.json();
+        const { icon, main, description } = data.weather[0];
+        const { temp, pressure, humidity } = data.main;
+        const { deg, speed } = data.wind;
+
+        context.commit("setIcon", icon);
+        context.commit("setWeather", main);
+        context.commit("setTemp", temp);
+        context.commit("setDescription", description);
+        context.commit("setPressure", pressure);
+        context.commit("setHumidity", humidity);
+        context.commit("setWindDeg", deg);
+        context.commit("setWindSpeed", speed);
+        context.commit("setVisibility", data.visibility);
+      } catch (err) {
+        context.commit("showError", { error: true, message: err.message });
+      }
     },
 
     async getForecast(context, payload) {
-      const apiKey = "56b7d91218774cf2f9808498488f31f9";
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${payload}&appid=${apiKey}&units=metric`
-      );
-      const { list } = await response.json();
-      context.commit("setForecastList", list);
+      try {
+        const apiKey = "56b7d91218774cf2f9808498488f31f9";
+        if (!payload) {
+          throw new Error("Empty value");
+        }
+
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/forecast?q=${payload}&appid=${apiKey}&units=metric`
+        );
+        if (!response.ok) {
+          throw new Error("Can't find this city");
+        }
+
+        const { list } = await response.json();
+        context.commit("setForecastList", list);
+      } catch (err) {
+        context.commit("showError", { error: true, message: err.message });
+      }
     },
   },
 
   getters: {
     modalInput(state) {
       return state.modalInput;
+    },
+    errorState(state) {
+      return state.error;
+    },
+    errorMessage(state) {
+      return state.errorMessage;
     },
     enteredCity(state) {
       return state.currentCity;
