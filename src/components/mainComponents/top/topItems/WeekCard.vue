@@ -1,14 +1,18 @@
 <template>
   <div class="card">
-    <p class="date">Today</p>
-    <img class="img" src="../../../../assets/icons/01d.png" alt="" />
+    <p class="date">{{ day }}</p>
+    <img
+      class="img"
+      :src="`https://zyzin.com/projects/weather/img/weather-icons/${icon}.png`"
+      alt=""
+    />
     <div class="temp__diff">
       <p class="temp__max">
-        10
+        {{ dayTemp }}
         <span class="temp__type">C</span>
       </p>
       <p class="temp__min">
-        3
+        {{ nightTemp }}
         <span class="temp__type">C</span>
       </p>
     </div>
@@ -16,7 +20,10 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["icon", "dayTemp", "nightTemp", "day"],
+  computed: {},
+};
 </script>
 
 <style scoped>

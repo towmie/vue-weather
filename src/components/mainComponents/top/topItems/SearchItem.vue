@@ -23,6 +23,7 @@ export default {
     setCity() {
       this.$store.dispatch("setCity", this.cityName);
       this.$store.dispatch("getCityData", this.cityName);
+      this.$store.dispatch("getForecast", this.cityName);
       this.cityName = "";
     },
   },

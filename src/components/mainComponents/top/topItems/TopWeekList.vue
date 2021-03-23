@@ -1,10 +1,13 @@
 <template>
   <div class="weeklist">
-    <WeekCard />
-    <WeekCard />
-    <WeekCard />
-    <WeekCard />
-    <WeekCard />
+    <WeekCard
+      v-for="day in forecastList"
+      :key="day.id"
+      :icon="day.icon"
+      :day-temp="day.nightTemp"
+      :night-temp="day.dayTemp"
+      :day="day.day"
+    />
   </div>
 </template>
 
@@ -12,6 +15,11 @@
 import WeekCard from "./WeekCard";
 export default {
   components: { WeekCard },
+  computed: {
+    forecastList() {
+      return this.$store.getters.currentForecast;
+    },
+  },
 };
 </script>
 

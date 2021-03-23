@@ -12,17 +12,17 @@
         <span class="side__data">{{ currentTrmp }}</span>
         <span class="side__type">C</span>
       </div>
-      <p class="side__weather">{{ currentDesc }}</p>
+      <p class="side__weather">{{ currentWeather }}</p>
+      <p class="side__desc">{{ currentDesc }}</p>
     </div>
-    <p class="aside__date">Today: <span></span></p>
+    <p class="aside__date">
+      Today: <span>{{ today }}</span>
+    </p>
   </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {};
-  },
   computed: {
     currentCity() {
       return this.$store.getters.enteredCity;
@@ -33,8 +33,18 @@ export default {
     currentDesc() {
       return this.$store.getters.currentDescription;
     },
+    currentWeather() {
+      return this.$store.getters.currentWeather;
+    },
     currentIcon() {
       return this.$store.getters.currentIcon;
+    },
+    today() {
+      const todayDate = new Date();
+      const weekday = `${todayDate}`.split(" ")[0];
+      const day = `${todayDate}`.split(" ")[2];
+      const month = `${todayDate}`.split(" ")[1];
+      return `${weekday}, ${day} ${month}`;
     },
   },
   methods: {},
@@ -67,6 +77,13 @@ export default {
   position: relative;
   box-shadow: 0 0 1rem #000;
   overflow: hidden;
+}
+
+.side__desc {
+  font-size: 2rem;
+  margin-bottom: 6rem;
+  font-weight: 300;
+  color: rgb(160, 159, 159);
 }
 
 .side__wrapper::after,
@@ -127,10 +144,11 @@ export default {
 }
 
 .side__weather {
-  margin: 7.5rem 0;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
   color: #d8d8da;
   font-weight: 500;
-  font-size: 2.8rem;
+  font-size: 3.5rem;
 }
 
 .aside__date {

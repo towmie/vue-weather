@@ -11,6 +11,7 @@ export default {
 
 <style scoped>
 .title {
+  padding-left: 4.5rem;
   display: block;
   margin-top: 3rem;
   font-weight: 300;
