@@ -1,13 +1,6 @@
-// 'use strict';
 <template>
-  <form @submit.prevent="setCity" class="form">
-    <input
-      class="search"
-      type="text"
-      placeholder="Enter your City"
-      v-model="cityName"
-      name="city"
-    />
+  <form class="form" @submit.prevent="hideInput" v-if="getHideModalValue">
+    <input type="text" name="" id="" class="input" v-model="cityName" />
     <button type="submit" class="search-btn"></button>
   </form>
 </template>
@@ -20,9 +13,14 @@ export default {
     };
   },
   methods: {
-    setCity() {
+    hideInput() {
+      this.$store.dispatch("hideModalInput", false);
       this.$store.dispatch("updateUI", this.cityName);
-      this.cityName = "";
+    },
+  },
+  computed: {
+    getHideModalValue() {
+      return this.$store.getters.modalInput;
     },
   },
 };
@@ -30,20 +28,19 @@ export default {
 
 <style scoped>
 .form {
-  position: relative;
-  max-width: 30rem;
-  min-width: 20rem;
-  width: 100%;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-.search {
-  padding: 1rem 3rem;
-  width: 100%;
+.input {
+  font-size: 3rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
   border: none;
   outline: none;
-  border-radius: 1.5rem;
-  font-family: inherit;
-  font-size: 1.6rem;
-  background-color: rgb(221, 221, 221);
+  font-weight: 300;
 }
 
 .search-btn {

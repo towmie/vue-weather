@@ -5,9 +5,10 @@ import { createStore } from "vuex";
 export default createStore({
   state() {
     return {
+      modalInput: true,
       currentCity: "moscow",
-      temp: null,
-      icon: "",
+      temp: 10,
+      icon: "01d",
       humidity: null,
       pressure: null,
       description: "",
@@ -20,6 +21,9 @@ export default createStore({
   },
 
   mutations: {
+    hideModalInput(state, payload) {
+      state.modalInput = payload;
+    },
     setCity(state, payload) {
       state.currentCity = payload;
     },
@@ -97,8 +101,17 @@ export default createStore({
   },
 
   actions: {
+    hideModalInput(context, payload) {
+      context.commit("hideModalInput", payload);
+    },
     setCity(context, payload) {
       context.commit("setCity", payload);
+    },
+
+    updateUI(context, payload) {
+      context.dispatch("setCity", payload);
+      context.dispatch("getCityData", payload);
+      context.dispatch("getForecast", payload);
     },
 
     async getCityData(context, payload) {
@@ -133,6 +146,9 @@ export default createStore({
   },
 
   getters: {
+    modalInput(state) {
+      return state.modalInput;
+    },
     enteredCity(state) {
       return state.currentCity;
     },

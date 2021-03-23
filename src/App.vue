@@ -1,16 +1,23 @@
 <template>
-  <main class="main">
+  <main class="main" :class="{ blured: hideModalInput }">
     <SideComponent />
     <MainComponent />
   </main>
+  <BaseInput />
 </template>
 
 <script>
 import SideComponent from "./components/SideComponent";
 import MainComponent from "./components/mainComponents/MainComponent.vue";
+import BaseInput from "./components/base/BaseInput";
 
 export default {
-  components: { SideComponent, MainComponent },
+  components: { SideComponent, MainComponent, BaseInput },
+  computed: {
+    hideModalInput() {
+      return this.$store.getters.modalInput;
+    },
+  },
 };
 </script>
 
@@ -54,5 +61,10 @@ button {
 .main {
   display: flex;
   position: relative;
+}
+
+.blured {
+  pointer-events: none;
+  filter: blur(10px);
 }
 </style>

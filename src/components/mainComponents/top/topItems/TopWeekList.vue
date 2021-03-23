@@ -4,8 +4,8 @@
       v-for="day in forecastList"
       :key="day.id"
       :icon="day.icon"
-      :day-temp="day.nightTemp"
-      :night-temp="day.dayTemp"
+      :day-temp="day.dayTemp"
+      :night-temp="day.nightTemp"
       :day="day.day"
     />
   </div>
